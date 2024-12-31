@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfolio</title>
+    <style>
+        :root {
+            /* Light theme variables */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f7fa;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --card-bg: #ffffff;
+            --border-color: #ddd;
+            --hero-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --shadow-color: rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] {
+            /* Dark theme variables */
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --nav-bg: rgba(26, 26, 26, 0.95);
+            --card-bg: #2d2d2d;
+            --border-color: #444;
+            --hero-gradient: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+            --shadow-color: rgba(0,0,0,0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+        position: fixed;
+        bottom: 1rem;  /* Changed from top to bottom */
+        right: 1rem;
+        z-index: 1000;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        }
+
+        .theme-toggle:hover {
+        background: var(--text-primary);
+        color: var(--bg-primary);
+        
+        }
+
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            background-color: var(--nav-bg);
+            padding: 1rem;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            z-index: 100;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #007bff;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--hero-gradient);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+            border: 5px solid var(--bg-primary);
+            box-shadow: 0 4px 6px var(--shadow-color);
+        }
+
+        .hero-content {
+        position: relative;
+        z-index: 1;
+        
+        }
+
+    .hero-content h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+        
+        }
+
+    .hero-content p {
+        font-size: 1.2rem;
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+        
+        }
+
+
+        /* Terminal Introduction */
+.terminal-intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.terminal-window {
+    width: 100%;
+    max-width: 800px;
+    background-color: #1a1a1a;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+.terminal-header {
+    background-color: #2d2d2d;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #444;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 8px;
+    margin-right: 15px;
+}
+
+.terminal-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.close { background-color: #ff5f56; }
+.minimize { background-color: #ffbd2e; }
+.maximize { background-color: #27c93f; }
+
+.terminal-title {
+    color: #fff;
+    font-size: 14px;
+    font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-body {
+    padding: 20px;
+    font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #fff;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.line-content {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.prompt {
+    color: #00ff00;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.command {
+    color: #fff;
+    position: relative;
+}
+
+.command::after {
+    content: '▋';
+    animation: blink 1s infinite;
+}
+
+.response {
+    color: #00ff00;
+    white-space: pre-wrap;
+    margin-left: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Initially hide main content */
+.navbar, #home, .theme-toggle {
+    display: none;
+}
+
+/* Scrollbar styling */
+.terminal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.terminal-body::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+}
+
+.terminal-body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+@media (max-width: 768px) {
+    .terminal-intro {
+        padding: 1rem;
+    }
+    
+    .terminal-body {
+        font-size: 12px;
+    }
+}
+
+
+        /* Projects Section */
+        .projects {
+            padding: 5rem 2rem;
+            background-color: var(--bg-primary);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .project-link:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            height: 100%;
+            transition: box-shadow 0.3s;
+        }
+
+        .project-link:hover .project-card {
+            box-shadow: 0 6px 12px var(--shadow-color);
+        }
+
+        .project-card:hover {
+            transform: none;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .project-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .tech-stack {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            background-color: var(--bg-secondary);
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 2rem;
+            background-color: var(--bg-secondary);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+
+
+        .button-container {
+        display: flex;
+        gap: 1rem;  /* Adds space between buttons */
+        justify-content: center;
+        margin-top: 1rem;
+        }
+
+        .submit-btn {
+        background-color: #007bff;
+        color: #fff;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        }
+
+
+        .submit-btn:hover {
+        background-color: #0056b3;
+        }
+
+/* Responsive adjustments */
+        @media (max-width: 768px) {
+        .button-container {
+        flex-direction: column;
+        align-items: center;
+        }
+    
+        .submit-btn {
+        width: 200px;  /* Fixed width for mobile */
+        margin: 0.5rem 0;
+        }
+        }
+
+        /* Footer */
+        .footer {
+        background-color: var(--bg-secondary);
+        color: var(--text-primary);
+        text-align: center;
+        padding: 2rem;
+        margin-bottom: 4rem;  /* Added margin to prevent overlap with the theme toggle */
+        
+        }
+
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+            border: 5px solid #ffffff;  /* Changed from var(--bg-primary) to #ffffff */
+            box-shadow: 0 4px 6px var(--shadow-color);
+            }
+
+/* Maintain responsiveness */
+            @media (max-width: 768px) {
+            .profile-image {
+            width: 150px;
+            height: 150px;
+            border: 4px solid #ffffff;  /* Slightly smaller border for mobile */
+            }
+}
+        }
+    </style>
+</head>
+<body>
+    <!--terminal-->
+<div class="terminal-intro" id="terminal-intro">
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <span class="terminal-button close"></span>
+                <span class="terminal-button minimize"></span>
+                <span class="terminal-button maximize"></span>
+            </div>
+            <div class="terminal-title">visitor@5epi0l:~</div>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+            <div class="line-content">
+                <span class="prompt">visitor@5epi0l:~$</span>
+                <span class="command" data-text="whoami"></span>
+            </div>
+            <div class="line-content response hidden">
+                Red Teamer | CTF Player
+            </div>
+
+            <div class="line-content hidden">
+                <span class="prompt">visitor@5epi0l:~$</span>
+                <span class="command" data-text="ls -la skills/"></span>
+            </div>
+            <div class="line-content response hidden">
+drwxr-xr-x  2 5epi0l 5epi0l 4096 Dec 31 12:00 .
+drwxr-xr-x 21 5epi0l 5epi0l 4096 Dec 31 12:00 ..
+-rwxr-xr-x  1 5epi0l 5epi0l  5epi0l   Red Teaming
+-rwxr-xr-x  1 5epi0l 5epi0l  5epi0l   MalDev
+-rwxr-xr-x  1 5epi0l 5epi0l  5epi0l   CTFs
+            </div>
+
+            <div class="line-content hidden">
+                <span class="prompt">visitor@5epi0l:~$</span>
+                <span class="command" data-text="cat welcome.txt"></span>
+            </div>
+            <div class="line-content response hidden">
+                Welcome to my portfolio! Feel free to 
+                explore my projects and get in touch.
+            </div>
+
+            <div class="line-content hidden">
+                <span class="prompt">visitor@5epi0l:~$</span>
+                <span class="command" data-text="./start_portfolio.sh"></span>
+            </div>
+            <div class="line-content response hidden">Initializing portfolio...</div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <img src="images/back.jpeg" alt="Background" class="hero-bg">
+        <div class="hero-content">
+            <img src="images/profile.jpg" alt="Profile Picture" class="profile-image">
+            <h1>5epi0l</h1>
+            <p>Red Teamer and CTF Player</p>
+            <button class="submit-btn" onclick="redirectToTHM()">TryHackMe Profile</button>
+            <button class="submit-btn" onclick="redirectToHTB()">HackTheBox Profile</button>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+<section id="projects" class="projects">
+    <h2 class="section-title">My Projects</h2>
+    <div class="project-grid">
+        <a href="https://github.com/5epi0l/fastmap" class="project-link">
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="images/terminal.jpg">
+                </div>
+                <div class="project-info">
+                    <h3>FastMap</h3>
+                    <p>A Fast portscanner written in python.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Portscanner</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Offsec</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+        
+        <a href="https://github.com/5epi0l/shellpop" class="project-link">
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="images/shellpop.jpg">
+                </div>
+                <div class="project-info">
+                    <h3>ShellPop</h3>
+                    <p>ShellPop is a lightweight and versatile reverse shell generator and listener implemented entirely in C++.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">C++</span>
+                        <span class="tech-tag">Reverse shells</span>
+                        <span class="tech-tag">Red Teaming</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+        
+        <a href="https://github.com/5epi0l/https://github.com/5epi0l/MalDev/blob/main/remote.nim" class="project-link">
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="images/procinjector.jpg">
+                </div>
+                <div class="project-info">
+                    <h3>Process Injector</h3>
+                    <p>a shellcode injector written in nim that spawns a remote process, injects the
+    user-provided shellcode into the memory space of the remote process and executes it</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Nim</span>
+                        <span class="tech-tag">Stager</span>
+                        <span class="tech-tag">Process Injection</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Contact Me</h2>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 5epi0l. All rights reserved.</p>
+    </footer>
+
+
+    <script>
+
+
+        function handleProjectClick(event, url) {
+        event.preventDefault();
+        
+        // You can add loading state or animation here if desired
+        window.open(url, '_blank'); // Opens in new tab
+        // Or use this to open in same tab:
+        // window.location.href = url;
+    }
+
+    // Optional: Add click tracking
+        document.querySelectorAll('.project-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const url = link.getAttribute('href');
+                console.log(`Project clicked: ${url}`);
+                // You can add analytics tracking here if desired
+                handleProjectClick(e, url);
+            });
+        });
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Check for saved theme preference
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+            }
+        });
+
+        // Keep all the existing JavaScript (smooth scrolling, form handling, redirects, etc.)
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form submission handler
+        function handleSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            console.log('Form submitted:', { name, email, message });
+            alert('Thank you for your message! I will get back to you soon.');
+            event.target.reset();
+        }
+
+        // Redirect to THM
+        async function redirectToTHM() {
+            const redirectBtn = document.querySelector('.submit-btn');
+            const originalText = redirectBtn.textContent;
+            const targetURL = 'https://tryhackme.com/r/p/5epi0l';
+            
+            try {
+                redirectBtn.textContent = 'Redirecting...';
+                redirectBtn.disabled = true;
+                await new Promise(resolve => setTimeout(resolve, 500));
+                window.location.href = targetURL;
+                
+                redirectBtn.textContent = 'Success!';
+                setTimeout(() => {
+                    redirectBtn.textContent = originalText;
+                    redirectBtn.disabled = false;
+                }, 2000);
+            } catch (error) {
+                console.error('Redirect failed:', error);
+                redirectBtn.textContent = 'Redirect Failed';
+                redirectBtn.style.backgroundColor = '#dc3545';
+                
+                setTimeout(() => {
+                    redirectBtn.textContent = originalText;
+                    redirectBtn.style.backgroundColor = '#007bff';
+                    redirectBtn.disabled = false;
+                }, 2000);
+            }
+        }
+
+        // Redirect to HTB
+        async function redirectToHTB() {
+            const redirectBtn = document.querySelector('.submit-btn');
+            const originalText = redirectBtn.textContent;
+            const targetURL = 'https://app.hackthebox.com/profile/716879';
+            
+            try {
+                redirectBtn.textContent = 'Redirecting...';
+                redirectBtn.disabled = true;
+                await new Promise(resolve => setTimeout(resolve, 500));
+                window.location.href = targetURL;
+                
+                redirectBtn.textContent = 'Success!';
+                setTimeout(() => {
+                    redirectBtn.textContent = originalText;
+                    redirectBtn.disabled = false;
+                }, 2000);
+            } catch (error) {
+                console.error('Redirect failed:', error);
+                redirectBtn.textContent = 'Redirect Failed';
+                redirectBtn.style.backgroundColor = '#dc3545';
+                
+                setTimeout(() => {
+                    redirectBtn.textContent = originalText;
+                    redirectBtn.style.backgroundColor = '#007bff';
+                    redirectBtn.disabled = false;
+                }, 2000);
+            }
+        }
+
+        // Add scroll animation for navbar
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > lastScroll && currentScroll > 200) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+            lastScroll = currentScroll;
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+    const terminal = document.getElementById('terminal-intro');
+    const terminalBody = document.getElementById('terminal-body');
+    let isAnimating = false;
+
+    async function typeText(element, text) {
+        for (let char of text) {
+            element.textContent += char;
+            await new Promise(resolve => setTimeout(resolve, 50));
+        }
+    }
+
+    async function animateTerminal() {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        const lines = terminalBody.querySelectorAll('.line-content');
+        
+        for (let line of lines) {
+            line.classList.remove('hidden');
+            
+            if (line.querySelector('.command')) {
+                const commandSpan = line.querySelector('.command');
+                const textToType = commandSpan.getAttribute('data-text');
+                commandSpan.textContent = '';
+                await typeText(commandSpan, textToType);
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+
+            if (line.classList.contains('response')) {
+                await new Promise(resolve => setTimeout(resolve, 2000));
+            }
+
+            // Scroll to bottom
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+
+        // Fade out terminal after completion
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        terminal.style.opacity = '0';
+        terminal.style.transition = 'opacity 1s ease-out';
+
+        // Show main content
+        setTimeout(() => {
+            terminal.style.display = 'none';
+            document.querySelector('nav').style.display = 'flex';
+            document.querySelector('#home').style.display = 'flex';
+            document.querySelector('.theme-toggle').style.display = 'block';
+        }, 1000);
+
+        isAnimating = false;
+    }
+
+    // Start the animation
+    animateTerminal().catch(console.error);
+});
+    </script>
+        <button class="theme-toggle" onclick="toggleTheme()">🌓 Theme</button>
+
+</body>
+</html>
