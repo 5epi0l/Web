@@ -378,6 +378,102 @@
             color: var(--text-secondary);
         }
 
+        /* Social section */
+
+        .socials {
+            padding: 5rem 2rem;
+            background-color: var(--bg-primary);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+        }
+
+        .social-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            height: 100%;
+            transition: box-shadow 0.3s;
+        }
+
+        .social-link:hover .social-card {
+            box-shadow: 0 6px 12px var(--shadow-color);
+        }
+
+        .social-card:hover {
+            transform: none;
+        }
+
+        .social-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .social-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .social-card:hover .social-image img {
+            transform: scale(1.05);
+        }
+
+        .social-info {
+            padding: 1.5rem;
+        }
+
+        .social-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .social-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .social-stack {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .social-tag {
+            background-color: var(--bg-secondary);
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+
         /* Contact Section */
         .contact {
             padding: 5rem 2rem;
@@ -607,6 +703,46 @@ drwxr-xr-x 21 5epi0l 5epi0l 4096 Dec 31 12:00 ..
                         <span class="tech-tag">Stager</span>
                         <span class="tech-tag">Process Injection</span>
                     </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!--social secion-->
+
+<section id="socials" class="socials">
+    <h2 class="section-title">My Socials</h2>
+    <div class="social-grid">
+        <a href="https://instagram.com/subhdoesnotexist" class="social-link">
+            <div class="social-card">
+                <div class="social-image">
+                    <img src="images/insta.jpg">
+                </div>
+                <div class="social-info">
+                    <h3>Instagram</h3>
+                </div>
+            </div>
+        </a>
+        
+        <a href="https://x.com/5epi0l" class="social-link">
+            <div class="social-card">
+                <div class="social-image">
+                    <img src="images/x.png">
+                </div>
+                <div class="social-info">
+                    <h3>Twitter</h3>
+                </div>
+            </div>
+        </a>
+        
+        <a href="https://www.reddit.com/user/Grim5hade/" class="social-link">
+            <div class="social-card">
+                <div class="social-image">
+                    <img src="images/reddit.jpg">
+                </div>
+                <div class="social-info">
+                    <h3>Reddit</h3>
                 </div>
             </div>
         </a>
