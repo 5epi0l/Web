@@ -647,8 +647,11 @@ drwxr-xr-x 21 5epi0l 5epi0l 4096 Dec 31 12:00 ..
             <img src="images/profile.jpg" alt="Profile Picture" class="profile-image">
             <h1>5epi0l</h1>
             <p>Red Teaming | CTFs | Philosophy</p>
-            <button class="submit-btn" onclick="redirectToTHM()">TryHackMe Profile</button>
-            <button class="submit-btn" onclick="redirectToHTB()">HackTheBox Profile</button>
+            <p>Hey There! I am 5epi0l, an 18-year-old with a keen interest in Offsec and Philosophy. Dive in, explore, and enjoy your stay.</p>
+            <p>Don’t forget to check out my stuff and share your thoughts!</p> 
+            <button class="submit-btn" onclick="redirectToTHM()">THM Profile</button>
+            <button class="submit-btn" onclick="redirectToHTB()">HTB Profile</button>
+            <button class="submit-btn" onclick="redirectToBlogs()">Blogs</button>
         </div>
     </section>
 
@@ -876,6 +879,37 @@ drwxr-xr-x 21 5epi0l 5epi0l 4096 Dec 31 12:00 ..
             const redirectBtn = document.querySelector('.submit-btn');
             const originalText = redirectBtn.textContent;
             const targetURL = 'https://app.hackthebox.com/profile/716879';
+            
+            try {
+                redirectBtn.textContent = 'Redirecting...';
+                redirectBtn.disabled = true;
+                await new Promise(resolve => setTimeout(resolve, 500));
+                window.location.href = targetURL;
+                
+                redirectBtn.textContent = 'Success!';
+                setTimeout(() => {
+                    redirectBtn.textContent = originalText;
+                    redirectBtn.disabled = false;
+                }, 2000);
+            } catch (error) {
+                console.error('Redirect failed:', error);
+                redirectBtn.textContent = 'Redirect Failed';
+                redirectBtn.style.backgroundColor = '#dc3545';
+                
+                setTimeout(() => {
+                    redirectBtn.textContent = originalText;
+                    redirectBtn.style.backgroundColor = '#007bff';
+                    redirectBtn.disabled = false;
+                }, 2000);
+            }
+        }
+
+
+        // Redirect to blogs
+        async function redirectToBlogs() {
+            const redirectBtn = document.querySelector('.submit-btn');
+            const originalText = redirectBtn.textContent;
+            const targetURL = 'https://www.rationalia.in/';
             
             try {
                 redirectBtn.textContent = 'Redirecting...';
