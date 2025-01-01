@@ -49,7 +49,7 @@
         /* Theme Toggle Button */
         .theme-toggle {
         position: fixed;
-        bottom: 1rem;  /* Changed from top to bottom */
+        bottom: 1rem; 
         right: 1rem;
         z-index: 1000;
         background: var(--bg-secondary);
@@ -512,7 +512,7 @@
 
         .button-container {
         display: flex;
-        gap: 1rem;  /* Adds space between buttons */
+        gap: 1rem;  
         justify-content: center;
         margin-top: 1rem;
         }
@@ -532,7 +532,6 @@
         background-color: #0056b3;
         }
 
-/* Responsive adjustments */
         @media (max-width: 768px) {
         .button-container {
         flex-direction: column;
@@ -540,7 +539,7 @@
         }
     
         .submit-btn {
-        width: 200px;  /* Fixed width for mobile */
+        width: 200px;  
         margin: 0.5rem 0;
         }
         }
@@ -551,7 +550,7 @@
         color: var(--text-primary);
         text-align: center;
         padding: 2rem;
-        margin-bottom: 4rem;  /* Added margin to prevent overlap with the theme toggle */
+        margin-bottom: 4rem;  
         
         }
 
@@ -565,16 +564,15 @@
             height: 200px;
             border-radius: 50%;
             margin-bottom: 2rem;
-            border: 5px solid #ffffff;  /* Changed from var(--bg-primary) to #ffffff */
+            border: 5px solid #ffffff; 
             box-shadow: 0 4px 6px var(--shadow-color);
             }
 
-/* Maintain responsiveness */
             @media (max-width: 768px) {
             .profile-image {
             width: 150px;
             height: 150px;
-            border: 4px solid #ffffff;  /* Slightly smaller border for mobile */
+            border: 4px solid #ffffff;  
             }
 }
         }
@@ -988,16 +986,13 @@
                 await new Promise(resolve => setTimeout(resolve, 2000));
             }
 
-            // Scroll to bottom
             terminalBody.scrollTop = terminalBody.scrollHeight;
         }
 
-        // Fade out terminal after completion
         await new Promise(resolve => setTimeout(resolve, 1000));
         terminal.style.opacity = '0';
         terminal.style.transition = 'opacity 1s ease-out';
 
-        // Show main content
         setTimeout(() => {
             terminal.style.display = 'none';
             document.querySelector('nav').style.display = 'flex';
@@ -1008,7 +1003,6 @@
         isAnimating = false;
     }
 
-    // Start the animation
     animateTerminal().catch(console.error);
 });
     </script>
