@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shubh's Portfolio</title>
     <style>
+        
+
         :root {
             /* Light theme variables */
             --bg-primary: #ffffff;
@@ -576,6 +578,8 @@
             }
 }
         }
+
+
     </style>
 </head>
 <body>
@@ -604,11 +608,11 @@
                 <span class="command" data-text="ls -la skills/"></span>
             </div>
             <div class="line-content response hidden">
-drwxr-xr-x  2 5epi0l 5epi0l 4096 Dec 31 12:00 .
-drwxr-xr-x 21 5epi0l 5epi0l 4096 Dec 31 12:00 ..
--rwxr-xr-x  1 5epi0l 5epi0l  5epi0l   Red Teaming
--rwxr-xr-x  1 5epi0l 5epi0l  5epi0l   MalDev
--rwxr-xr-x  1 5epi0l 5epi0l  5epi0l   CTFs
+                drwxr-xr-x  2 5epi0l 5epi0l 4096 Dec 31 12:00 .
+                drwxr-xr-x 21 5epi0l 5epi0l 4096 Dec 31 12:00 ..
+                -rwxr-xr-x  1 5epi0l 5epi0l  5epi0l   Red Teaming
+                -rwxr-xr-x  1 5epi0l 5epi0l  5epi0l   MalDev
+                -rwxr-xr-x  1 5epi0l 5epi0l  5epi0l   CTFs
             </div>
 
             <div class="line-content hidden">
@@ -654,6 +658,9 @@ drwxr-xr-x 21 5epi0l 5epi0l 4096 Dec 31 12:00 ..
             <button class="submit-btn" onclick="redirectToBlogs()">Blogs</button>
         </div>
     </section>
+
+    
+
 
     <!-- Projects Section -->
 <section id="projects" class="projects">
@@ -713,6 +720,7 @@ drwxr-xr-x 21 5epi0l 5epi0l 4096 Dec 31 12:00 ..
     </div>
 </section>
 
+
 <!--social secion-->
 
 <section id="socials" class="socials">
@@ -753,6 +761,8 @@ drwxr-xr-x 21 5epi0l 5epi0l 4096 Dec 31 12:00 ..
     </div>
 </section>
 
+
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <h2 class="section-title">Contact Me</h2>
@@ -781,22 +791,19 @@ drwxr-xr-x 21 5epi0l 5epi0l 4096 Dec 31 12:00 ..
 
     <script>
 
-
         function handleProjectClick(event, url) {
         event.preventDefault();
         
-        // You can add loading state or animation here if desired
-        window.open(url, '_blank'); // Opens in new tab
-        // Or use this to open in same tab:
-        // window.location.href = url;
+        
+        window.open(url, '_blank'); 
+        
     }
 
-    // Optional: Add click tracking
         document.querySelectorAll('.project-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 const url = link.getAttribute('href');
                 console.log(`Project clicked: ${url}`);
-                // You can add analytics tracking here if desired
+                
                 handleProjectClick(e, url);
             });
         });
@@ -813,7 +820,7 @@ drwxr-xr-x 21 5epi0l 5epi0l 4096 Dec 31 12:00 ..
             }
         }
 
-        // Check for saved theme preference
+        
         document.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
@@ -821,8 +828,6 @@ drwxr-xr-x 21 5epi0l 5epi0l 4096 Dec 31 12:00 ..
             }
         });
 
-        // Keep all the existing JavaScript (smooth scrolling, form handling, redirects, etc.)
-        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
